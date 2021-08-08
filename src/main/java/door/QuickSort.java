@@ -1,23 +1,22 @@
 package door;
 
-import java.util.Scanner;
 
+/**
+ * @author zhangguolin
+ */
 public class QuickSort {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-
-        String input = sc.nextLine();
-
-        while (!input.equals("quit")){
-            System.out.println(input);
-            input = sc.nextLine();
+        int[] r = {30,24,5,58,18,36,12,42,39};
+        quickSort(r,0,8);
+        for (int i = 0; i < r.length; i++) {
+            System.out.println(r[i]);
         }
 
     }
 
-    void quickSort(int r[],int low,int high){
+    static void quickSort(int r[],int low,int high){
         if (low<high){
             int mid = partition(r, low, high);
             quickSort(r, low, mid-1);
@@ -25,27 +24,27 @@ public class QuickSort {
         }
     }
 
-    static void swap(int a,int b){
-        int temp = a;
-        a = b;
-        b=temp;
-    }
-
-    int partition(int r[],int low,int high){
+    static int partition(int r[],int low,int high){
         int i = low,j=high,pivot=r[low];
 
         while (i<j){
-            while (i<j&&r[j]>pivot)j--;
+            while (i<j&&r[j]>pivot){j--;}
             if (i<j){
-                swap(r[i++],r[j]);
+                int temp = r[i];
+                r[i] = r[j];
+                r[j] = temp;
+                i++;
+
             }
-            while (i<j&&r[i]<=pivot)i++;
+            while (i<j&&r[i]<=pivot){i++;}
             if (i<j){
-                swap(r[i],r[j--]);
+                int temp = r[i];
+                r[i] = r[j];
+                r[j] = temp;
+                j--;
             }
         }
         return i;
     }
-
 
 }
